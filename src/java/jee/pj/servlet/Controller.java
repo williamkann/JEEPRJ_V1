@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -60,28 +62,32 @@ public class Controller extends HttpServlet {
         password = prop.getProperty("dbPassword");
         DBActions dba = new DBActions(url, login, password);
         
-        
         employee = new Employee();
 
-        
         String submit_btn = request.getParameter(FRM_SUBMIT);
         String selection = request.getParameter(FRM_SELECT);
         String action = request.getParameter(FRM_ACTION);
         String detailAction = request.getParameter(FRM_DETAILACTION);
+        String loginAction = request.getParameter(FRM_LOG);
 
-        
-        if(submit_btn == null && action == null && detailAction == null)
+        if(submit_btn == null && action == null && detailAction == null && loginAction == null)
             btn = false;
 
         //If it's not the first time we load the home.jsp file
         if(btn != false && submit_btn != null)   
         {
-
             User userInput = new User();
             userInput.setLogin(request.getParameter(FRM_LOGIN));
             userInput.setPassword(request.getParameter(FRM_PWD));
+            
+            ServletContext ctx = this.getServletContext();
+            String pwdAdmin = ctx.getInitParameter("passwordAdmin"); // See what is in password variable set in the web.xml
+            String lgnAdmin = ctx.getInitParameter("loginAdmin");
+            
+            String pwdEmpl = ctx.getInitParameter("passwordEmpl"); // See what is in password variable set in the web.xml
+            String lgnEmpl = ctx.getInitParameter("loginEmpl");
 
-            if(dba.validateUser(userInput))
+            if((userInput.getLogin().equals(lgnAdmin) && userInput.getPassword().equals(pwdAdmin)) || (userInput.getLogin().equals(lgnEmpl) && userInput.getPassword().equals(pwdEmpl)))
             {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", userInput);
@@ -135,8 +141,6 @@ public class Controller extends HttpServlet {
             btn = true;
             request.getRequestDispatcher(JSP_HOME).forward(request, response);
         }
-        
-        
         /**
          * 
          * Actions on the homePage file (Add / Delete / Details)
@@ -183,11 +187,9 @@ public class Controller extends HttpServlet {
 
                     session.invalidate();
                     
-                    request.getRequestDispatcher(JSP_HOME).forward(request, response);
+                    request.getRequestDispatcher(JSP_GOODBYE).forward(request, response);
                 }
-
             }
-       
             //if we click on add without selecting a radio button, we will send it to the detail page
             else if(selection == null)
             {   
@@ -213,13 +215,10 @@ public class Controller extends HttpServlet {
                     request.getRequestDispatcher(CON_HOMEPAGE_NOEMP).forward(request, response);
                 }
                 else if(action.equals("Logout"))
-                {
-                    
-                    HttpSession session = request.getSession();
-                    
+                {                   
+                    HttpSession session = request.getSession();                    
                     session.invalidate();
-
-                    request.getRequestDispatcher(JSP_HOME).forward(request, response);
+                    request.getRequestDispatcher(JSP_GOODBYE).forward(request, response);
                 }
                 else
                 { 
@@ -227,12 +226,8 @@ public class Controller extends HttpServlet {
                     request.setAttribute("ERR_SELECTION", ERR_SELECTION);
                     request.getRequestDispatcher(CON_HOMEPAGE).forward(request, response);
                 }
-
             }
-  
-            
         }
-        
         
         /**
          * 
@@ -315,8 +310,11 @@ public class Controller extends HttpServlet {
                      request.setAttribute("EmployeeTable", dba.getEmployee());
                      request.getRequestDispatcher(CON_HOMEPAGE).forward(request, response);
                  }
-
             }
+        }       
+        else if(loginAction.equals("Connect"))
+        {
+            response.sendRedirect("temp.jsp");
         }
     }
     

@@ -56,29 +56,6 @@ public class DBActions {
         return rs;
     }
     
-
-    
-    public ArrayList<User> getUser() throws SQLException
-    {
-
-        tableUsers = new ArrayList<User>();
-     
-        rs = getResultSet(SQL_USERS);
-
-        while(rs.next())
-        {
-            User user = new User();
-
-            user.setLogin(rs.getString("LOGIN"));
-            user.setPassword(rs.getString("PWD"));
-
-
-            tableUsers.add(user);
-
-        }
-
-        return tableUsers;
-    }
     
     public ArrayList<Employee> getEmployee() throws SQLException
     {
@@ -109,19 +86,6 @@ public class DBActions {
         return tableEmployees;
     }
     
-    public boolean validateUser(User input) throws SQLException
-    {
-        test = false;
-        tableUsers = getUser();
-        for(User user : tableUsers)
-        {
-            if(user.getPassword().equals(input.getPassword()) && user.getLogin().equals(input.getLogin()))
-            {
-                test = true;
-            }
-        }
-        return test;
-    }
     
     public Employee searchEmployeeById(int employeeId) throws SQLException
     {

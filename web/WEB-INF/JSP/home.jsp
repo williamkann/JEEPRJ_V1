@@ -18,21 +18,19 @@
         <div class="error">
             
             
-            
-            
-            
         <% 
             String err_message = (String)request.getAttribute("ERR_MESSAGE");
             String err_loginPasswordMessage = (String)request.getAttribute("ERR_LOGIN_PWD");
-              
+            
+            out.println("<div class='error'>");
             if(err_message != null)
-                out.println("<p style=\"color:red;\">" + err_message + "</p>");
+                out.println("<p>" + err_message + "</p>");
             if(err_loginPasswordMessage != null)
-                out.println("<p style=\"color:red;\">" + err_loginPasswordMessage + "</p>");
+                out.println("<p>" + err_loginPasswordMessage + "</p>");           
+            out.println("</div>");
         %>
         </div>
-        
-        
+
         <div class="container"> 
             <div id="title">Login</div>
                 <form action="Controller" method="post">

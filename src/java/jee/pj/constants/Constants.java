@@ -31,6 +31,7 @@ public class Constants {
     public final static String JSP_LOGOUT = "/WEB-INF/JSP/logout.jsp";
     public final static String JSP_HOMEPAGE_NOEMP = "/WEB-INF/JSP/noEmployees_homePage.jsp";
     public final static String JSP_HOMEPAGE_NOEMP_EMPL = "/WEB-INF/JSP/noEmployees_homePage_emp.jsp";
+    public final static String JSP_GOODBYE = "/WEB-INF/JSP/goodbye.jsp";
     
     /* Properties file*/
     public final static String PROP_DB = "/WEB-INF/db.properties";
@@ -42,6 +43,7 @@ public class Constants {
     public final static String FRM_SELECT = "selection";
     public final static String FRM_ACTION = "action";
     public final static String FRM_DETAILACTION = "detailAction";
+    public final static String FRM_LOG = "actionConnect";
     
     /* SQL Requests */
     public final static String SQL_USERS = "SELECT * FROM USERS";

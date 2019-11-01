@@ -13,8 +13,7 @@ public class User {
     
     private String login;
     private String password;
-    private int tUser;
-
+   
     public String getLogin() {
         return login;
     }
@@ -31,15 +30,4 @@ public class User {
         this.password = password;
     }
 
-    public int gettUser() {
-        return tUser;
-    }
-
-    public void settUser(int tUser) {
-        this.tUser = tUser;
-    }
-
-    
-    
-    
 }

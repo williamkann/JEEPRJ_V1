@@ -22,29 +22,21 @@
             String ERR_EMP = (String) request.getAttribute("ERR_EMP");
             User user = (User)session.getAttribute("user");
             
-                    
             out.println("<h1>This is your " + user.getLogin() + "'s page</h1>");
             out.println("<h2>List of Employees</h2>");
             out.println("<h3>Welcome " + user.getLogin() + "</h3>");
             
-            
-
             if(ERR_EMP != null)
             {
                 String ERR_SELECTION = (String) request.getAttribute("ERR_SELECTION");
                 String ERR_ADD = (String) request.getAttribute("ERR_ADD");
                 
                 out.println("<form action='Controller' method='post'>");
+               
                 out.println("<div class='error'>");
                 out.println("<p>" + ERR_EMP + "</p>");
-                    if(ERR_SELECTION != null)
-                        out.println("<p>" + ERR_SELECTION + "</p>");
-                    else if(ERR_ADD != null)
-                        out.println("<p>" + ERR_ADD + "</p>");
                 out.println("</div>");    
 
-                
-                
                 out.println("<div class='choice'>");
                 out.println("<input type=\"submit\" class=\"btn btn-primary\" name=\"action\" value=\"Details\"/>");
                 out.println("</div>");

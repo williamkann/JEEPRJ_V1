@@ -66,18 +66,20 @@
         out.println("<label for=\"city\">Email</label>");    
         out.println("<input type=\"text\" name=\"email\" value = \"" + employee.getEmail() + "\" size=\"35\" disabled/>");
         out.println("</div>");
+        out.println("<div class='error'>");
         if(ERR_EMAIL != null)
-            out.println("<p style=\"color:red;\">" + ERR_EMAIL + "</p>");
+            out.println("<p>" + ERR_EMAIL + "</p>");
         
         if(ERR_WORKPHONE != null)
-            out.println("<p style=\"color:red;\">" + ERR_WORKPHONE + "</p>");
+            out.println("<p>" + ERR_WORKPHONE + "</p>");
         
         if(ERR_HOMEPHONE != null)
-            out.println("<p style=\"color:red;\">" + ERR_HOMEPHONE + "</p>");
+            out.println("<p>" + ERR_HOMEPHONE + "</p>");
         
         if(ERR_MOBPHONE != null)
-            out.println("<p style=\"color:red;\">" + ERR_MOBPHONE + "</p>");  
-
+            out.println("<p>" + ERR_MOBPHONE + "</p>");  
+        out.println("</div>");
+        
         out.println("<div class='change'>");
         out.println("<input type=\"submit\" class=\"btn btn-danger\" name=\"detailAction\" value=\"Cancel\"/>");
         out.println("</div>");

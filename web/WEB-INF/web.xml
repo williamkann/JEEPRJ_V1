@@ -11,6 +11,22 @@
         <servlet-name>Controller</servlet-name>
         <url-pattern>/Controller</url-pattern>
     </servlet-mapping>
+    <context-param>
+        <param-name>loginAdmin</param-name>
+        <param-value>admin</param-value>
+    </context-param>
+    <context-param>
+        <param-name>passwordAdmin</param-name>
+        <param-value>admin</param-value>
+    </context-param>
+    <context-param>
+        <param-name>loginEmpl</param-name>
+        <param-value>empl</param-value>
+    </context-param>
+    <context-param>
+        <param-name>passwordEmpl</param-name>
+        <param-value>empl</param-value>
+    </context-param>
     <session-config>
         <session-timeout>
             30

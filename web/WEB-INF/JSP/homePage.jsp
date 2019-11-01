@@ -26,14 +26,14 @@
     <%
         
             User user = (User)session.getAttribute("user");
+            ArrayList<Employee> tableEmployee = (ArrayList<Employee>)request.getAttribute("EmployeeTable");    
+            String ERR_SELECTION = (String) request.getAttribute("ERR_SELECTION");
+            String ERR_ADD = (String) request.getAttribute("ERR_ADD");
             
             out.println("<h1>This is your " + user.getLogin() + "'s page</h1>");
             out.println("<h2>List of Employees</h2>");
-            
             out.println("<h3>Welcome " + user.getLogin() + "</h3>");
             
-            ArrayList<Employee> tableEmployee = (ArrayList<Employee>)request.getAttribute("EmployeeTable");
-
             out.println("<form action='Controller' method='post'>");
             out.println("<table class='table table-striped table-responsive-lg'>");
             out.println("<thead>");
@@ -70,13 +70,7 @@
             }
             out.println("</tbody>");
             out.println("</table>");
-            
-
-            
-            String ERR_SELECTION = (String) request.getAttribute("ERR_SELECTION");
-            String ERR_ADD = (String) request.getAttribute("ERR_ADD");
-
-
+  
             out.println("<div class='error'>");
             if(ERR_SELECTION != null)
                 out.println("<p>" + ERR_SELECTION + "</p>");
@@ -92,8 +86,6 @@
             
             out.println("</div>");
             out.println("</form>");
-            
-            
         %>
     </body>
 </html>
